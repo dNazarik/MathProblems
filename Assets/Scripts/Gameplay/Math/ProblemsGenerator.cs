@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using _3rdParty.Core;
-using Core;
 using Gameplay.Configs;
 using Gameplay.General;
 using UnityEngine;
@@ -21,14 +20,9 @@ namespace Gameplay.Math
 
         private readonly int[] _difficultyMaxRangeNumber = { 10, 100, 1000 };
 
-        private readonly GameModel _gameModel;
         private readonly GameSettings _gameSettings;
 
-        public ProblemsGenerator(GameModel gameModel, GameSettings gameSettings)
-        {
-            _gameModel = gameModel;
-            _gameSettings = gameSettings;
-        }
+        public ProblemsGenerator(GameSettings gameSettings) => _gameSettings = gameSettings;
 
         private int GetMaxNumberForRange(Difficulty difficulty) => _difficultyMaxRangeNumber[(int)difficulty];
 

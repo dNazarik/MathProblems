@@ -2,7 +2,6 @@ using System;
 using _3rdParty.Core;
 using Background;
 using Core.SceneLoader;
-using Gameplay.General;
 using VContainer.Unity;
 
 namespace Gameplay.Common.MainMenu
@@ -30,6 +29,13 @@ namespace Gameplay.Common.MainMenu
             CreateView();
         }
 
+        public void Dispose()
+        {
+            _view.ChangeBgBtn.onClick.RemoveAllListeners();
+            _view.LeaderboardBtn.onClick.RemoveAllListeners();
+            _view.NewGameBtn.onClick.RemoveAllListeners();
+        }
+
         private async void CreateView()
         {
             var prefab = await _model.GetPrefab();
@@ -52,13 +58,6 @@ namespace Gameplay.Common.MainMenu
             SceneLoaderController.LoadLeadersScene();
 
             _view.HideMiddleButtons();
-        }
-
-        public void Dispose()
-        {
-            _view.ChangeBgBtn.onClick.RemoveAllListeners();
-            _view.LeaderboardBtn.onClick.RemoveAllListeners();
-            _view.NewGameBtn.onClick.RemoveAllListeners();
         }
     }
 }

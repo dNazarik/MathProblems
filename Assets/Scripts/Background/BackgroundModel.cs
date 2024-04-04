@@ -1,6 +1,4 @@
-using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace Background
 {
@@ -8,23 +6,10 @@ namespace Background
     {
         private const int BackgroundsAmount = 3;
 
-        private const string BackgroundPrefabPath = "Assets/Prefabs/Panels/BackgroundCanvas.prefab";
         public const string BackgroundImagePathFormat = "Assets/Art/Backgrounds/{0}.jpg";
         private const string SavedBgKey = "BgId";
 
         public int BgId { get; private set; }
-
-        public static async Task<GameObject> GetPrefab()
-        {
-            var loader = Addressables.LoadAssetAsync<GameObject>(BackgroundPrefabPath);
-            
-            while (!loader.IsDone)
-            {
-                await Task.Delay(1);
-            }
-
-            return loader.Result;
-        }
 
         public void TryGetSavedBackgroundId()
         {

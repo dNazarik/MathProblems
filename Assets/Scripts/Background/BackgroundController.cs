@@ -9,11 +9,7 @@ namespace Background
         private readonly BackgroundModel _model;
         private readonly BackgroundView _view;
 
-        public BackgroundController(BackgroundModel model, BackgroundView view)
-        {
-            _model = model;
-            _view = view;
-        }
+        public BackgroundController(BackgroundModel model, BackgroundView view) => (_model, _view) = (model, view);
 
         public void Init() => CheckSavedBackgroundImage();
 

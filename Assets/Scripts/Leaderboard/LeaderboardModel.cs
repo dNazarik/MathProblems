@@ -29,10 +29,7 @@ namespace Leaderboard
             TryLoadLeaderboard();
         }
 
-        public bool IsNewRecordSet(int score)
-        {
-            return LeaderboardData.entries.Any(e => e.score < score);
-        }
+        public bool IsNewRecordSet(int score) => LeaderboardData.entries.Any(e => e.score < score);
 
         public void SaveLeaderboard()
         {

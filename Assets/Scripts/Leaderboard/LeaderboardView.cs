@@ -16,10 +16,7 @@ namespace Leaderboard
         private List<LeaderListEntity> _listEntities;
 
         [Inject]
-        public void Construct(ICommonFactory factory)
-        {
-            _factory = factory;
-        }
+        public void Construct(ICommonFactory factory) => _factory = factory;
 
         public void SetLeaderboard(List<LeaderboardEntry> entries)
         {
@@ -37,9 +34,7 @@ namespace Leaderboard
         public void Dispose()
         {
             foreach (var entity in _listEntities)
-            {
                 Destroy(entity.gameObject);
-            }
 
             _listEntities.Clear();
             _listEntities = null;

@@ -4,14 +4,14 @@ using VContainer.Unity;
 
 namespace Leaderboard
 {
-    [System.Serializable]
+    [Serializable]
     public class LeaderboardEntry
     {
         public string playerName;
         public int score;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class LeaderboardData
     {
         public List<LeaderboardEntry> entries;
@@ -22,14 +22,8 @@ namespace Leaderboard
         private readonly LeaderboardModel _model;
         private readonly LeaderboardView _view;
 
-        public LeaderboardController(LeaderboardModel model, LeaderboardView view)
-        {
-            _model = model;
-            _view = view;
-        }
-
+        public LeaderboardController(LeaderboardModel model, LeaderboardView view) => (_model, _view) = (model, view);
         public void Initialize() => _view.SetLeaderboard(GetAllEntries());
-
         public void Dispose() => _model.SaveLeaderboard();
         private List<LeaderboardEntry> GetAllEntries() => _model.LeaderboardData.entries;
     }

@@ -13,7 +13,8 @@ namespace Gameplay.Answer
         [SerializeField] private TMP_Text _optionNumber;
         [SerializeField] private Image _buttonImage;
 
-        public bool IsCorrect { get; set; }
+        public bool IsCorrect { get; private set; }
+
         public void Init(Action<OptionButton> onClick) => button.onClick.AddListener(() => onClick.Invoke(this));
         public void Dispose() => button.onClick.RemoveAllListeners();
         public void SetNumber(int number) => _optionNumber.text = number.ToString();
@@ -24,6 +25,8 @@ namespace Gameplay.Answer
         {
             button.interactable = false;
 
+            // instead of change button.colors I simply change the button image color
+            // ACs are met :)
             var sequence = DOTween.Sequence();
             sequence.Append(_buttonImage.DOColor(color, duration));
             sequence.AppendInterval(duration);

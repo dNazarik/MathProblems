@@ -26,12 +26,12 @@ namespace Gameplay.Common
             _changeBgButton.onClick.AddListener(_backgroundController.SetNextBackground);
         }
 
-        public void ShowPauseScreen(bool isShow) => _pauseScreen.SetActive(isShow);
-
         public void Dispose()
         {
             _continueButton.onClick.RemoveAllListeners();
             _changeBgButton.onClick.RemoveAllListeners();
         }
+
+        public void ShowPauseScreen(bool isShow) => _pauseScreen.SetActive(isShow);
     }
 }
