@@ -127,7 +127,8 @@ namespace Gameplay.General
         {
             _gameModel.IsGameOver = true;
 
-            _audioController.PlayEffect(_audioConfig.GetClipByType(AudioType.GameOver));
+            if (_gameModel.IsAudioEnabled())
+                _audioController.PlayEffect(_audioConfig.GetClipByType(AudioType.GameOver));
 
             await _gameUIDataContainer.GameOverView.PlayAnimation();
 
