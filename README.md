@@ -10,3 +10,14 @@ This solution contains:
 - a few Unit tests
 - BG change via Addressables
 - Scoreboard (JSON)
+- Assemblies
+- Dynamic UI (at least UI items don't overlap each other :) )
+
+Notes:
+
+I have added a couple of Unit tests which was outside of the test task;
+I have added audios that also was outside of the test task, you can enable/disable it via the game settings config;
+I didn't use StringBuilder because there is not much text. In most projects, strings don't cause performance/memory issues;
+Without QA it is hard to catch everything, so if you find something -- let me know, I will fix it :)
+
+Also, if you want me to add/remove/change something -- I will do it with a pleasure :)
