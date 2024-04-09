@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using _3rdParty.Core;
+using Core.Utils;
 using Leaderboard.ListEntity;
 using UnityEngine;
 using VContainer;

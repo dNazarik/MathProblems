@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: 
   AudioEnabled: 0
-  CurrentDifficulty: 0
   DefaultSessionTime: 60
   AbilityResetCooldown: 5
+  CorrectAnswersForNextLevel: 10
   TimerBonuses: 010000000200000003000000
   ScoreValues: 0a000000140000001e000000

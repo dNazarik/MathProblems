@@ -7,9 +7,9 @@ namespace Gameplay.Configs
     public class GameSettings : ScriptableObject
     {
         public bool AudioEnabled;
-        public Difficulty CurrentDifficulty;
         public int DefaultSessionTime;
         public int AbilityResetCooldown;
+        public int CorrectAnswersForNextLevel = 10;
         public int[] TimerBonuses = { 1, 2, 3 };
         public int[] ScoreValues = { 10, 20, 30 };
     }

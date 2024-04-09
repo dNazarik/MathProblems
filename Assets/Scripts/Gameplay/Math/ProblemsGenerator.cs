@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using _3rdParty.Core;
+using Core.Utils;
 using Gameplay.Configs;
 using Gameplay.General;
 using UnityEngine;
@@ -20,17 +20,17 @@ namespace Gameplay.Math
 
         private readonly int[] _difficultyMaxRangeNumber = { 10, 100, 1000 };
 
-        private readonly GameSettings _gameSettings;
+        private readonly GameModel _gameModel;
 
-        public ProblemsGenerator(GameSettings gameSettings) => _gameSettings = gameSettings;
+        public ProblemsGenerator(GameModel gameModel) => _gameModel = gameModel;
 
         private int GetMaxNumberForRange(Difficulty difficulty) => _difficultyMaxRangeNumber[(int)difficulty];
 
         public MathProblem GetGeneratedQuestion()
         {
-            var problemType = GetProblemTypeRandomly(_gameSettings.CurrentDifficulty);
+            var problemType = GetProblemTypeRandomly(_gameModel.CurrentDifficulty);
             var problemSymbol = GetProblemSymbol(problemType);
-            var questionAndAnswer = GenerateQuestionAndAnswer(_gameSettings.CurrentDifficulty, problemType);
+            var questionAndAnswer = GenerateQuestionAndAnswer(_gameModel.CurrentDifficulty, problemType);
             var problemString = string.Format(ProblemFormat, questionAndAnswer.Item1, problemSymbol,
                 questionAndAnswer.Item2);
             var restOptions = GenerateRestOptions(questionAndAnswer.Item3);
@@ -145,7 +145,7 @@ namespace Gameplay.Math
 
             for (var i = 0; i < restAnswers.Length; i++)
             {
-                var option = Randomizer.GetNumberInRangeExcluding(0, GetMaxNumberForRange(_gameSettings.CurrentDifficulty),
+                var option = Randomizer.GetNumberInRangeExcluding(0, GetMaxNumberForRange(_gameModel.CurrentDifficulty),
                     existingOptions);
 
                 restAnswers[i] = option;

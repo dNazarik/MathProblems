@@ -1,7 +1,7 @@
 using System;
-using _3rdParty.Core;
 using Background;
-using Core.SceneLoader;
+using Core.Utils;
+using Core.Utils.SceneLoader;
 using VContainer.Unity;
 
 namespace Gameplay.Common.MainMenu
@@ -48,14 +48,14 @@ namespace Gameplay.Common.MainMenu
 
         private void StartNewGame()
         {
-            SceneLoaderController.LoadGameScene();
+            SceneLoaderUtility.LoadGameScene();
 
             _view.gameObject.SetActive(false);
         }
 
         private void ShowLeaderboards()
         {
-            SceneLoaderController.LoadLeadersScene();
+            SceneLoaderUtility.LoadLeadersScene();
 
             _view.HideMiddleButtons();
         }

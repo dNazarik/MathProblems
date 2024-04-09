@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace _3rdParty.Core
+namespace Core.Utils
 {
     public interface ICommonFactory
     {

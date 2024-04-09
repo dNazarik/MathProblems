@@ -1,5 +1,5 @@
 using System;
-using _3rdParty.Core;
+using Core.Utils;
 using Gameplay.Configs;
 
 namespace Gameplay.General
@@ -13,6 +13,9 @@ namespace Gameplay.General
         private readonly GameSettings _gameSettings;
 
         public event Action OnAbilityReady;
+        public event Action OnLevelUp;
+
+        public Difficulty CurrentDifficulty { get; private set; }
 
         public bool IsGameOver = false;
         public bool IsGamePaused = false; //also used for VFX, it is no sense to create another IsVfxPlaying field
@@ -20,19 +23,23 @@ namespace Gameplay.General
         private bool _isAbilityUsed = false;
         private int _timer;
         private int _abilityCounter;
+        private int _correctAnswersAmount;
 
         public int Score { get; private set; } = 0;
         public bool IsAudioEnabled() => _gameSettings.AudioEnabled;
-        private int GetTimeBonus() => _gameSettings.TimerBonuses[(int)_gameSettings.CurrentDifficulty];
-        private int GetScoreValue() => _gameSettings.ScoreValues[(int)_gameSettings.CurrentDifficulty];
+        private int GetTimeBonus() => _gameSettings.TimerBonuses[(int)CurrentDifficulty];
+        private int GetScoreValue() => _gameSettings.ScoreValues[(int)CurrentDifficulty];
 
         public GameModel(ITimerController timerController, GameSettings gameSettings)
         {
             _timerController = timerController;
             _gameSettings = gameSettings;
 
+            CurrentDifficulty = Difficulty.Easy;
+
             Score = 0;
             _abilityCounter = 0;
+            _correctAnswersAmount = 0;
             _timer = _gameSettings.DefaultSessionTime;
 
             _timerEntityId = _timerController.CreateTimeEntity();
@@ -47,6 +54,8 @@ namespace Gameplay.General
 
             Score += GetScoreValue();
 
+            CheckDifficulty();
+
             if (!_isAbilityUsed)
                 return;
 
@@ -60,6 +69,23 @@ namespace Gameplay.General
 
                 _isAbilityUsed = false;
             }
+        }
+
+        private void CheckDifficulty()
+        {
+            if (CurrentDifficulty == Difficulty.Hard)
+                return;
+
+            _correctAnswersAmount++;
+
+            if (_correctAnswersAmount < _gameSettings.CorrectAnswersForNextLevel)
+                return;
+
+            _correctAnswersAmount = 0;
+
+            CurrentDifficulty++;
+
+            OnLevelUp?.Invoke();
         }
     }
 }

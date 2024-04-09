@@ -1,6 +1,7 @@
-using _3rdParty.Core;
+using Audio;
 using Background;
-using Core.SceneLoader;
+using Core.Utils;
+using Core.Utils.SceneLoader;
 using Gameplay.Common.MainMenu;
 using Gameplay.Configs;
 using Leaderboard;
@@ -32,7 +33,7 @@ namespace Core
             builder.Register<AudioController>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<CommonFactory>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<MainMenuModel>(Lifetime.Singleton).AsSelf();
-            builder.Register<SceneLoaderController>(Lifetime.Singleton).AsSelf();
+            builder.Register<SceneLoaderUtility>(Lifetime.Singleton).AsSelf();
             builder.Register<LeaderboardModel>(Lifetime.Singleton);
 
             builder.RegisterInstance(_gameSettings);

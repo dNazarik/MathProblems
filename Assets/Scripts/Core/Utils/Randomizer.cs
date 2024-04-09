@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace _3rdParty.Core
+namespace Core.Utils
 {
     public static class Randomizer
     {

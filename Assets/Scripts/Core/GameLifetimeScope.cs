@@ -1,4 +1,4 @@
-using _3rdParty.Core;
+using Core.Utils;
 using Gameplay.Common;
 using Gameplay.General;
 using Gameplay.Math;

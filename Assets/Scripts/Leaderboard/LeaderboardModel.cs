@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using _3rdParty.Core;
+using Core.Utils;
 using UnityEngine;
 
 namespace Leaderboard

@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using Core;
-using Core.SceneLoader;
+using Audio;
+using Core.Utils.SceneLoader;
 using Gameplay.Common;
 using Gameplay.Math;
 using Leaderboard;
@@ -141,11 +141,11 @@ namespace Gameplay.General
                 {
                     _leaderboardModel.SaveNewRecord(playerName, _gameModel.Score);
 
-                    SceneLoaderController.LoadMenuScene();
-                }, SceneLoaderController.LoadMenuScene);
+                    SceneLoaderUtility.LoadMenuScene();
+                }, SceneLoaderUtility.LoadMenuScene);
             }
             else
-                SceneLoaderController.LoadMenuScene();
+                SceneLoaderUtility.LoadMenuScene();
         }
     }
 }
