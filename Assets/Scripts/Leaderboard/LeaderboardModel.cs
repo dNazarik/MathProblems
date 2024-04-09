@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Core.Utils;
+using Core.Utils.SaveLoad;
 using UnityEngine;
 
 namespace Leaderboard
@@ -11,9 +11,6 @@ namespace Leaderboard
     {
         private const int TopPlayerAmount = 10;
         private const int MockScoreFactor = 200;
-
-        private const string LoadingErrorMessageFormat =
-            "Something went wrong during leaderboard loading, gonna create a new one. Error: {0}";
 
         private readonly string[] _mockLeaders =
             { "Sam", "Ana", "Nick", "Valera", "Goose", "Kate", "Dan", "Ben Dover", "Antony", "admin" };
@@ -31,12 +28,7 @@ namespace Leaderboard
 
         public bool IsNewRecordSet(int score) => LeaderboardData.entries.Any(e => e.score < score);
 
-        public void SaveLeaderboard()
-        {
-            var json = JsonUtility.ToJson(LeaderboardData);
-
-            File.WriteAllText(_filePath, json);
-        }
+        public void SaveLeaderboard() => SaveLoadUtility.SaveDataToFile(LeaderboardData, _filePath);
 
         public void SaveNewRecord(string name, int score)
         {
@@ -60,20 +52,9 @@ namespace Leaderboard
 
         private void TryLoadLeaderboard()
         {
-            if (File.Exists(_filePath))
-            {
-                try
-                {
-                    var json = File.ReadAllText(_filePath);
+            LeaderboardData = SaveLoadUtility.LoadDataFromFile<LeaderboardData>(_filePath);
 
-                    LeaderboardData = JsonUtility.FromJson<LeaderboardData>(json);
-                }
-                catch (Exception e)
-                {
-                    Debug.Log(string.Format(LoadingErrorMessageFormat, e.Message));
-                }
-            }
-            else
+            if (LeaderboardData == null)
                 GenerateMockLeadersTable();
         }
 
